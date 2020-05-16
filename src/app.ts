@@ -1,91 +1,66 @@
-abstract class Department {
-  protected employees: string[] = [];
-  constructor(protected readonly id: string, public name: string) {}
+type Admin = {
+  name: string;
+  privileges: string[];
+};
 
-  abstract describe(this: Department): void;
+type Employee = {
+  name: string;
+  startDate: Date;
+};
 
-  addEmployee(employee: string) {
-    this.employees.push(employee);
+type ElevatedEmployee = Admin & Employee;
+
+const e1: ElevatedEmployee = {
+  name: "kelvin",
+  privileges: ["create-server"],
+  startDate: new Date(),
+};
+
+type Combinable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combinable & Numeric;
+
+function addd(a: Combinable, b: Combinable) {}
+
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInformation(m: UnknownEmployee) {
+  console.log("Name: " + emp1.name);
+  if ("privileges" in m) {
+    console.log("privileges " + m.privileges);
   }
-
-  printEmployeeInfo() {
-    console.log(this.employees.length);
-    console.log(this.employees);
-  }
-}
-
-class ITDepartment extends Department {
-  admins: string[] = [];
-  constructor(id: string, admins: string[]) {
-    super(id, "kelvin");
-    this.admins = admins;
-  }
-
-  describe() {
-    console.log("IT department" + this.id);
-  }
-}
-
-class AccountingDepartment extends Department {
-  private lastReport: string;
-  static fiscalYear: number = 2020;
-  private static instance: AccountingDepartment;
-
-  private constructor(private reports: string[]) {
-    super("account_01", "Accounting");
-    this.lastReport = reports[0];
-  }
-
-  static getInstance() {
-    if (this.instance) {
-      return this.instance;
-    }
-    this.instance = new AccountingDepartment(["kelvin", "Aubameyng"]);
-  }
-
-  addReport(report: string) {
-    this.reports.push(report);
-  }
-
-  describe() {
-    console.log("heeey");
-  }
-
-  get mostRecentReport() {
-    if (!this.lastReport) {
-      throw new Error("No report found...");
-    }
-    return this.lastReport;
-  }
-
-  set mostRecentReport(value: string) {
-    this.addReport(value);
-  }
-
-  static createEmployee(name: string) {
-    return { name: name };
-  }
-
-  printReports() {
-    console.log(this.reports);
-  }
-
-  addEmployee(name: string) {
-    this.employees.push(name);
+  if ("startDate" in m) {
+    console.log("privileges " + m.startDate);
   }
 }
 
-const ITDepartmen = new ITDepartment("novs", ["kelvin"]);
+class Car {
+  drive() {
+    console.log("driving");
+  }
+}
 
-// const accD = new AccountingDepartment(["kelvin", "wewe"]);
-// accD.addReport("kelivnv");
-// accD.printReports();
-// console.log(accD.mostRecentReport);
-// accD.mostRecentReport = "aubameyang";
+class Truck {
+  drive() {
+    console.log("driving truck");
+  }
 
-const accD = AccountingDepartment.getInstance();
+  loadCargo() {
+    console.log("Vehicle");
+  }
+}
 
-const emp1 = AccountingDepartment.createEmployee("Novak");
-console.log(emp1);
+type Vehicle = Car | Truck;
 
-console.log();
+const v1 = new Car();
+const v2 = new Truck();
+
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo();
+  }
+}
+
+useVehicle(v1);

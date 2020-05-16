@@ -1,64 +1,38 @@
 "use strict";
-class Department {
-    constructor(id, name) {
-        this.id = id;
-        this.name = name;
-        this.employees = [];
+const e1 = {
+    name: "kelvin",
+    privileges: ["create-server"],
+    startDate: new Date(),
+};
+function addd(a, b) { }
+function printEmployeeInformation(m) {
+    console.log("Name: " + emp1.name);
+    if ("privileges" in m) {
+        console.log("privileges " + m.privileges);
     }
-    describe() {
-        console.log(this.name);
-    }
-    addEmployee(employee) {
-        this.employees.push(employee);
-    }
-    printEmployeeInfo() {
-        console.log(this.employees.length);
-        console.log(this.employees);
+    if ("startDate" in m) {
+        console.log("privileges " + m.startDate);
     }
 }
-class ITDepartment extends Department {
-    constructor(id, admins) {
-        super(id, "kelvin");
-        this.admins = [];
-        this.admins = admins;
+class Car {
+    drive() {
+        console.log("driving");
     }
 }
-class AccountingDepartment extends Department {
-    constructor(reports) {
-        super("account_01", "Accounting");
-        this.reports = reports;
-        this.lastReport = reports[0];
+class Truck {
+    drive() {
+        console.log("driving truck");
     }
-    addReport(report) {
-        this.reports.push(report);
-    }
-    get mostRecentReport() {
-        if (!this.lastReport) {
-            throw new Error("No report found...");
-        }
-        return this.lastReport;
-    }
-    set mostRecentReport(value) {
-        this.addReport(value);
-    }
-    static createEmployee(name) {
-        return { name: name };
-    }
-    printReports() {
-        console.log(this.reports);
-    }
-    addEmployee(name) {
-        this.employees.push(name);
+    loadCargo() {
+        console.log("Vehicle");
     }
 }
-const acc = new Department("jeeiwe", "dsdsdsd");
-const ITDepartmen = new ITDepartment("novs", ["kelvin"]);
-const accD = new AccountingDepartment(["kelvin", "wewe"]);
-accD.addReport("kelivnv");
-accD.printReports();
-console.log(accD.mostRecentReport);
-accD.mostRecentReport = "aubameyang";
-acc.addEmployee("kelvin");
-acc.printEmployeeInfo();
-const emp1 = AccountingDepartment.createEmployee("Novak");
-console.log(emp1);
+const v1 = new Car();
+const v2 = new Truck();
+function useVehicle(vehicle) {
+    vehicle.drive();
+    if (vehicle instanceof Truck) {
+        vehicle.loadCargo();
+    }
+}
+useVehicle(v1);
