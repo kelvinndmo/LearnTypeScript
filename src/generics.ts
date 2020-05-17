@@ -46,3 +46,52 @@ function extractAndConvert<T extends object, U extends keyof T>(
 }
 
 extractAndConvert({ name: "novak" }, "name");
+
+//Generic classses
+class DataStorage<T extends number | string | boolean> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem("novak");
+
+const numbersStorage = new DataStorage<number>();
+numbersStorage.addItem(12);
+
+// const objectStorage = new DataStorage<object>();
+// const novObj = { name: "novak" };
+// objectStorage.addItem(novObj)
+
+//gerneric utility types
+interface courseGoal {
+  title: string;
+  description: string;
+  completionUntil: Date;
+}
+function createCourseGoal(title: string, description: string, date: Date) {
+  let courseGoal: Partial<courseGoal> = {};
+
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completionUntil = date;
+
+  return courseGoal as courseGoal;
+}
+
+//Reaondly
+
+const names: Readonly<string[]> = ["Novak", "Anna"];
+
+names.map((obj) => {
+  return obj.toString();
+});
+
+console.log(names);
