@@ -14,6 +14,7 @@ function printEmployeeInformation(m) {
         console.log("privileges " + m.startDate);
     }
 }
+// Discrimniated unions
 class Car {
     drive() {
         console.log("driving");
@@ -36,3 +37,18 @@ function useVehicle(vehicle) {
     }
 }
 useVehicle(v1);
+function moveAnimal(animal) {
+    let speed;
+    switch (animal.type) {
+        case "bird":
+            speed = animal.flyingSpeed;
+            break;
+        case "horse":
+            speed = animal.runningSpeed;
+            break;
+    }
+}
+//Type Casting
+// const paragraph = <HTMLInputElement>document.getElementById("message_output");
+const paragraph = document.getElementById("message_output");
+paragraph.value = "Hi There";

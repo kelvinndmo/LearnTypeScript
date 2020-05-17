@@ -35,6 +35,7 @@ function printEmployeeInformation(m: UnknownEmployee) {
   }
 }
 
+// Discrimniated unions
 class Car {
   drive() {
     console.log("driving");
@@ -88,3 +89,11 @@ function moveAnimal(animal: Animal) {
       break;
   }
 }
+
+//Type Casting
+// const paragraph = <HTMLInputElement>document.getElementById("message_output");
+const paragraph = document.getElementById(
+  "message_output"
+)! as HTMLInputElement;
+
+paragraph.value = "Hi There";
