@@ -97,3 +97,39 @@ const paragraph = document.getElementById(
 )! as HTMLInputElement;
 
 paragraph.value = "Hi There";
+
+// index properties
+interface ErrorContainer {
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: "not a valid email",
+};
+
+//function overloading
+function sum(n1: string, n2: string): string;
+function sum(n1: number, n2: number): number;
+function sum(n1: Combinable, n2: Combinable) {
+  if (typeof n1 === "string" || typeof n2 === "string") {
+    return n1.toString() + n2.toString();
+  }
+  return n1 + n2;
+}
+
+const result = sum("Kelvin", "Kelvin");
+console.log(result.split(""));
+
+const nums = sum(12, 12);
+
+const fetchedUserData = {
+  id: "dd",
+  name: "novak",
+  job: { title: "CEO", description: "am the boss" },
+};
+
+console.log(fetchedUserData?.job?.title);
+
+const userInput = null;
+
+const storedData = userInput ?? "DEFAULT";
